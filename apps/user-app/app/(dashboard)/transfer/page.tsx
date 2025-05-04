@@ -21,17 +21,19 @@ async function getBalance() {
 async function getOnRampTransactions() {
     const session = await getServerSession(authOptions);
     const txns = await prisma.onRampTransaction.findMany({
-        where: {
-            userId: Number(session?.user?.id)
-        }
+      where: {
+        userId: Number(session?.user?.id),
+      }
     });
+  
     return txns.map(t => ({
-        time: t.startTime,
-        amount: t.amount,
-        status: t.status,
-        provider: t.provider
-    }))
-}
+      time: t.startTime,
+      amount: t.amount,
+      status: t.status,
+      provider: t.provider,
+      onRampAmount: t.amount  // ✅ ADD THIS LINE
+    }));
+  }
 
 export default async function() {
     const balance = await getBalance();

@@ -4,6 +4,7 @@ export const OnRampTransactions = ({
     transactions
 }: {
     transactions: {
+        onRampAmount : number
         time: Date,
         amount: number,
         // TODO: Can the type of `status` be more specific?
@@ -29,10 +30,13 @@ export const OnRampTransactions = ({
                         {t.time.toDateString()}
                     </div>
                 </div>
+                <div>{t.status}</div>
                 <div className="flex flex-col justify-center">
                     + Rs {t.amount / 100}
                 </div>
-
+                <div className="flex flex-col justify-center">
+                    + Rs {t.onRampAmount / 100}
+                </div>
             </div>)}
         </div>
     </Card>
